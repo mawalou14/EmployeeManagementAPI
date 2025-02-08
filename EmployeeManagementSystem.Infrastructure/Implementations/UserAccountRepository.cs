@@ -11,6 +11,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using EmployeeManagementSystem.Infrastructure.Data;
 
 namespace ServerLibrary.Repositories.Implementation
 {
@@ -20,7 +21,7 @@ namespace ServerLibrary.Repositories.Implementation
         public async Task<GeneralResponse> CreateAsync(Register user)
         {
             //First CHeck if user is null
-            if (user is null) return new GeneralResponse(false, "Model is Empty");
+            if (user is null) return new GeneralResponse(false, "User not provided");
             //Then Check if user exists
             var checkUser = await FindUserByEmail(user.Email);
             if (checkUser != null) return new GeneralResponse(false, "User registered already");
